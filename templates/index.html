@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<title>Image Captioning</title>
+	<link rel="stylesheet" href="/static/style.css">
+</head>
+
+
+<body>
+
+	<h1>Image Captioning</h1>
+
+		<div class="upload-container">
+
+		  	  <div class="drag-area">
+		  	  	    <div class="icon-container">
+		  	  	         <img src="./static/file.svg" alt="" class="center" draggable="false">
+		  	  	    </div>
+                    	           
+		  	  </div>
+		</div>
+		<div class="title"><b>Choose your file from here, <span class="browseBtn">browse</span></div><b>
+		<form method="POST" action="/" enctype="multipart/form-data">
+		        <input type="file" name="userfile" id="fileinput" placeholder="Your Image">
+		             <div class="op">
+		                 <button class="btn" name="submit">Submit</button>
+                    </div>
+      </form>
+
+
+{% if your_caption %}
+   <div class="image">
+	<h3>Generated Caption : <i>{{your_caption}}</i></h3>
+   </div>
+ {%  endif %}
+
+	              
+		  	  	
+
+		  	  	
+
+<script>
+const dropZone=document.querySelector(".drag-area");
+
+const fileinput=document.querySelector("#fileinput");
+const browseBtn=document.querySelector(".browseBtn");
+
+function display()
+{
+	let fileType=file.type;
+	//console.log(fileType);
+	let filereader=new FileReader();
+
+	filereader.onload=()=>{
+		let fileURL=filereader.result;
+		let imgTag=`<img src="${fileURL}" alt="">`;
+		//imgTag.style.width="100px";
+		dropZone.innerHTML=imgTag;
+        
+	}
+	filereader.readAsDataURL(file);
+};
+
+
+browseBtn.onclick=()=>{
+	fileinput.click();
+}
+
+fileinput.addEventListener('change',function(){
+
+	file=this.files[0];
+	display();
+});
+
+</script>
+
+
+   
+      
+</body>
+
+</html>
+
+
+
